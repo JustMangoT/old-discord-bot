@@ -1,0 +1,40 @@
+Generals:
+  NO_PERMISSION: "Bạn không có quyền để thực hiện điều này!"
+  UNKNOWN_COMMAND: "Không rõ lệnh!"
+  NOT_NUMBER: "Đây không phải là một con số hợp lệ!"
+
+Members:
+  NOT_FOUND: "Không tìm thấy thành viên!"
+  IS_BOT: ""
+
+Economies:
+  Admin:
+    ADD_SUCCESS: "Bạn đã thêm %amount% cho %member%!"
+    REMOVE_SUCCESS: "Bạn đã lấy %amount% của %member%!"
+    ADD_TO_SET_QUEUE: "Bạn đã thêm %member% vào hàng đợi đặt %amount% MangoCoin! Sử dụng m!eco set (accept/deny) để hoàn thành!"
+    QUEUE_ACCEPT: "Bạn đã đặt %amount% MangoCoin cho %member%!"
+    QUEUE_DENY: "Bạn đã từ chối đặt %amount% MangoCoin cho %member%"
+    ALREADY_IN_SET_QUEUE: "Bạn đã có hàng đợi đặt %amount% MangoCoin cho %member%!"
+    NO_QUEUE: "Không có ai trong hàng đợi của bạn cả!"
+  Member:
+    BELOW_MINIMUM: "Số MangoCoin không thể dưới 0!"
+    NOT_ENOUGH: "Bạn không đủ MangoCoin để thực hiện!"
+    NO_AMOUNT: "Số MangoCoin không được để trống!"
+    ADD_TO_PAY_QUEUE: "Bạn đã thêm hàng đợi trả %amount% MangoCoin cho %member! Sử dụng m!eco pay (accept/deny) để hoàn thành!"
+    PAY_ACCEPT: "Bạn đã trả %amount% MangoCoin cho %member%!"
+    PAY_DENY: "Bạn đã từ chối trả %amount% MangoCoin cho %member!"
+    ALREADY_IN_PAY_QUEUE: "Bạn đã có hàng đợi trả %amount% MangoCoin cho %member%!"
+    NO_PAY_QUEUE: "Không có ai trong hàng đợi của bạn cả!"
+  Help:
+    ADD: "Sử dụng: m!eco add <Tên thành viên> <MangoCoin>!"
+    REMOVE: "Sử dụng: m!eco remove <Tên thành viên> <MangoCoin>!"
+    SET: "Sử dụng: m!eco set <Tên thành viên> <MangoCoin>!"
+    RESET: "Sử dụng: m!eco reset <Tên thành viên>!"
+    PAY: "Sử dụng: m!eco pay <Tên thành viên> <MangoCoin>!"
+    LIST:
+      - ""
+
+Diggers:
+  START: ""
+  STOP: ""
+  FULL_STORAGE: ""
