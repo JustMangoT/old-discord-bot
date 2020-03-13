@@ -35,14 +35,14 @@ module.exports = {
                 utils.sendMessage(msg, lang["Diggers"]["COLLECT_ZERO"]);
             } else if (args[0].toLowerCase() === "upgrade") {
                 let nextLevel = digger.getLevel(msg.author) + 1;
-                if (botConfig["Digger"]["Digger_" + nextLevel]["Price"] > eco.get(msg.author))
-                    return utils.sendMessage(msg, lang["Economies"]["Member"]["NOT_ENOUGH"]);
                 if (botConfig["Digger"]["Max_Level"] === digger.getLevel(msg.author))
                     return utils.sendMessage(msg, lang["Diggers"]["UPGRADE_MAX_LEVEL"]);
-                if (await digger.upgrade(msg.author))
+                if (botConfig["Digger"]["Digger_" + nextLevel]["Price"] > eco.get(msg.author))
+                    return utils.sendMessage(msg, lang["Economies"]["Member"]["NOT_ENOUGH"]);
+                if (await digger.upgrade(msg, msg.author))
                     utils.sendMessage(msg, lang["Diggers"]["UPGRADE_SUCCESS"]
-                        .replace("%from%", botConfig["Digger"]["Digger_" + (nextLevel - 1)]["NAME"])
-                        .replace("%to%", botConfig["Digger"]["Digger_" + nextLevel]["NAME"]));
+                        .replace("%from%", botConfig["Digger"]["Digger_" + (nextLevel - 1)]["Name"])
+                        .replace("%to%", botConfig["Digger"]["Digger_" + nextLevel]["Name"]));
             } else {
                 utils.sendMessage(msg, lang["Generals"]["UNKNOWN_COMMAND"]);
             }

@@ -74,6 +74,7 @@ Roles:
 Economies:
   Name: "MangoCoin"
   Suffix: "MGC"
+  Max_Money: ""
 
 #######################
 # +-----------------+ #

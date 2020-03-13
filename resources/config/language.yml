@@ -44,5 +44,5 @@ Diggers:
   COLLECT_ZERO: "Bạn không có MangoCoin nào trong máy đào cả :("
   BREAK: "Máy đào của bạn đã hỏng! m!dig fix để sửa!"
   FULL_STORAGE: "Đầy kho!"
-  UPGRADE_SUCCESS: "Bạn đã nâng cấp máy đào từ %from% thành %to%!d"
+  UPGRADE_SUCCESS: "Bạn đã nâng cấp máy đào từ %from% thành %to%!"
   UPGRADE_MAX_LEVEL: "Máy đào của bạn đã đạt cấp tối đa!"

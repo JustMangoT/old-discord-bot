@@ -39,11 +39,7 @@ module.exports = {
         return db.set(`${user.id}.diggerStatus`, b);
     },
     addLevel(user, amount) {
-        if (manager.check(user, amount)) {
-            db.add(`${user.id}.diggerLevel`, amount);
-            return true;
-        }
-        return false;
+        return db.add(`${user.id}.diggerLevel`, amount);
     },
     removeLevel(user, amount) {
         if (manager.check(user, amount)) {
@@ -142,11 +138,13 @@ module.exports = {
         }
         return false;
     },
-    async upgrade(user) {
+    async upgrade(msg, user) {
         const botConfig = await config.getDefaultConfig();
         if (this.getLevel(user) < botConfig["Digger"]["Max_Level"]) {
-            this.stop(user);
+            if (this.getStatus(user))
+                await this.stop(msg, user);
             this.addLevel(user, 1);
+            this.addDurability(user, botConfig["Digger"]["Digger_" + (this.getLevel(user) + 1)]["Durability"]);
             return true;
         }
         return false;
