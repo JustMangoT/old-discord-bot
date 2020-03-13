@@ -22,7 +22,8 @@ Economies:
     NO_AMOUNT: "Số MangoCoin không được để trống!"
     ADD_TO_PAY_QUEUE: "Bạn đã thêm hàng đợi trả %amount% MangoCoin cho %member! Sử dụng m!eco pay (accept/deny) để hoàn thành!"
     PAY_ACCEPT: "Bạn đã trả %amount% MangoCoin cho %member%!"
-    PAY_DENY: "Bạn đã từ chối trả %amount% MangoCoin cho %member!"
+    PAY_RECEIVE: "Bạn đã nhận được %amount% MangoCoin từ %member%!"
+    PAY_DENY: "Bạn đã từ chối trả %amount% MangoCoin cho %member%!"
     ALREADY_IN_PAY_QUEUE: "Bạn đã có hàng đợi trả %amount% MangoCoin cho %member%!"
     NO_PAY_QUEUE: "Không có ai trong hàng đợi của bạn cả!"
   Help:
@@ -35,6 +36,13 @@ Economies:
       - ""
 
 Diggers:
-  START: ""
-  STOP: ""
-  FULL_STORAGE: ""
+  START: "Bắt đầu khai thác!"
+  ALREADY_START: "Đã bắt đầu khai thác từ trước!"
+  STOP: "Dừng khai thác!"
+  ALREADY_STOP: "Đã dừng khai thác từ trước!"
+  COLLECT: "Bạn đã nhận được %amount% MGC từ máy đào!"
+  COLLECT_ZERO: "Bạn không có MangoCoin nào trong máy đào cả :("
+  BREAK: "Máy đào của bạn đã hỏng! m!dig fix để sửa!"
+  FULL_STORAGE: "Đầy kho!"
+  UPGRADE_SUCCESS: "Bạn đã nâng cấp máy đào từ %from% thành %to%!d"
+  UPGRADE_MAX_LEVEL: "Máy đào của bạn đã đạt cấp tối đa!"

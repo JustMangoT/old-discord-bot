@@ -2,6 +2,7 @@ const db = require("quick.db");
 
 const config = require("../../utils/config.js");
 const debug = require("../../utils/debugger.js");
+const digger = require("../../system/diggers.js");
 const utils = require("../../utils/utils.js");
 const eco = require("../../system/economies.js");
 
@@ -11,8 +12,9 @@ module.exports = async (bot) => {
 
     let allUsers = bot.users.cache.array();
     for (let a = 0; a < allUsers.length; a++) {
+        const diggerDurability = botConfig["Digger"]["Digger_1"]["Durability"];
         if (!db.has(allUsers[a].id))
-            db.set(allUsers[a].id, { money: 0, diggerStatus: false, diggerLevel: 1, diggerStorage: 0, warnTime: 0, muteTime: 0 });
+            db.set(allUsers[a].id, { money: 0, diggerStatus: false, diggerLevel: 1, diggerStorage: 0, diggerDurability: diggerDurability, warnTime: 0, muteTime: 0 });
         if (db.get(`${allUsers[a].id}.warnTime`) > 0) {
             setInterval(() => {
                 db.add(`${allUsers[a].id}.warnTime`, -1);

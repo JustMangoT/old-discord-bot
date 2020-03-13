@@ -23,39 +23,54 @@ module.exports = {
 
         if (msg.deletable) msg.delete();
 
+        const moneyInfo = new Discord.MessageEmbed()
+            .setColor(botConfig["Colors"]["Yellow"])
+            .setAuthor(`TÀI KHOẢN CỦA ${msg.author.tag}:`.toUpperCase(), msg.author.avatarURL())
+            .addField(`» Trong người: `, `${eco.get(msg.author)} ${botConfig["Economies"]["Suffix"]}`, false)
+            .addField(`» Trong ngân hàng:`, `(bank here) ${botConfig["Economies"]["Suffix"]}`, false)
+            .setThumbnail('https://imgur.com/rL1vPdt.png')
+            .setTimestamp()
+            .setFooter(`JustMangoStudio`, bot.user.avatarURL());
+
         if (args[0]) {
             const member = utils.getMember(msg, args.slice(1).join(" "));
             let amount = args.slice(2).join(" ");
 
-            if (args[0].toLowerCase() === "pay") {
-                if (args[1].toLowerCase() === "accept") {
-                    // Check if author already in queue
-                    if (payQueue.has(msg.author.id)) {
-                        eco.set(payQueue.get(msg.author.id)["member"], payQueue.get(msg.author.id)["amount"]);
-                        utils.sendMessage(msg, manager.placeHolder(ecoLang["Member"]["PAY_ACCEPT"],
-                            payQueue.get(msg.author.id)["member"], payQueue.get(msg.author.id)["amount"]));
-                        payQueue.delete(msg.author.id);
+            if (args[0].toLowerCase() === "info" || args[0].toLowerCase() === "me") {
+                await msg.channel.send(moneyInfo);
+            } else if (args[0].toLowerCase() === "pay") {
+                if (args[1]) {
+                    if (args[1].toLowerCase() === "accept") {
+                        // Check if author already in queue
+                        if (payQueue.has(msg.author.id)) {
+                            eco.set(payQueue.get(msg.author.id)["member"], payQueue.get(msg.author.id)["amount"]);
+                            utils.sendMessage(msg, manager.placeHolder(ecoLang["Member"]["PAY_ACCEPT"],
+                                payQueue.get(msg.author.id)["member"], payQueue.get(msg.author.id)["amount"]));
+                            payQueue.get(msg.author.id)["member"].send(manager.placeHolder(lang["Member"]["PAY_RECEIVE"],
+                                msg.author, payQueue.get(msg.author.id)["amount"]));
+                            payQueue.delete(msg.author.id);
+                        }
+                        return utils.sendMessage(msg, ecoLang["Member"]["NO_PAY_QUEUE"]);
+                    } else if (args[1].toLowerCase() === "deny") {
+                        // Check if author already in queue
+                        if (payQueue.has(msg.author.id)) {
+                            utils.sendMessage(msg, manager.placeHolder(ecoLang["Member"]["PAY_DENY"],
+                                payQueue.get(msg.author.id)["member"], payQueue.get(msg.author.id)["amount"]));
+                            payQueue.delete(msg.author.id);
+                        }
+                        return utils.sendMessage(msg, ecoLang["Member"]["NO_PAY_QUEUE"]);
                     }
-                    return utils.sendMessage(msg, ecoLang["Member"]["NO_PAY_QUEUE"]);
-                } else if (args[1].toLowerCase() === "deny") {
-                    // Check if author already in queue
-                    if (payQueue.has(msg.author.id)) {
-                        utils.sendMessage(msg, manager.placeHolder(ecoLang["Member"]["PAY_DENY"],
-                            payQueue.get(msg.author.id)["member"], payQueue.get(msg.author.id)["amount"]));
-                        payQueue.delete(msg.author.id);
-                    }
-                    return utils.sendMessage(msg, ecoLang["Member"]["NO_PAY_QUEUE"]);
                 }
-
                 // Check args length
                 if (args.length < 3)
                     return utils.sendMessage(msg, ecoLang["Help"]["PAY"]);
+
                 // Check if author already in queue
                 if (!payQueue.has(msg.author.id)) {
                     // Check member and amount
                     if (check(msg, member, amount, false)) {
                         payQueue.set(msg.author.id, { "member": member, "amount": amount });
-                        return utils.sendMessage(msg, manager.placeHolder(ecoLang["Admin"]["ADD_TO_PAY_QUEUE"],
+                        return utils.sendMessage(msg, manager.placeHolder(ecoLang["Member"]["ADD_TO_PAY_QUEUE"],
                             member, amount));
                     }
                     // Return if already have queue
@@ -82,28 +97,31 @@ module.exports = {
                         return utils.sendMessage(msg, manager.placeHolder(ecoLang["Admin"]["REMOVE_SUCCESS"], member, amount));
                 }
             } else if (args[0].toLowerCase() === "set") {
-                if (args[1].toLowerCase() === "accept") {
-                    // Check if author already in queue
-                    if (setQueue.has(msg.author.id)) {
-                        eco.set(setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]);
-                        utils.sendMessage(msg, manager.placeHolder(ecoLang["Admin"]["QUEUE_ACCEPT"],
-                            setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]));
-                        setQueue.delete(msg.author.id);
+                if (args[1]) {
+                    if (args[1].toLowerCase() === "accept") {
+                        // Check if author already in queue
+                        if (setQueue.has(msg.author.id)) {
+                            eco.set(setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]);
+                            utils.sendMessage(msg, manager.placeHolder(ecoLang["Admin"]["QUEUE_ACCEPT"],
+                                setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]));
+                            setQueue.delete(msg.author.id);
+                        }
+                        return utils.sendMessage(msg, ecoLang["Admin"]["NO_QUEUE"]);
+                    } else if (args[1].toLowerCase() === "deny") {
+                        // Check if author already in queue
+                        if (setQueue.has(msg.author.id)) {
+                            utils.sendMessage(msg, manager.placeHolder(ecoLang["Admin"]["QUEUE_DENY"],
+                                setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]));
+                            setQueue.delete(msg.author.id);
+                        }
+                        return utils.sendMessage(msg, ecoLang["Admin"]["NO_QUEUE"]);
                     }
-                    return utils.sendMessage(msg, ecoLang["Admin"]["NO_QUEUE"]);
-                } else if (args[1].toLowerCase() === "deny") {
-                    // Check if author already in queue
-                    if (setQueue.has(msg.author.id)) {
-                        utils.sendMessage(msg, manager.placeHolder(ecoLang["Admin"]["QUEUE_DENY"],
-                            setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]));
-                        setQueue.delete(msg.author.id);
-                    }
-                    return utils.sendMessage(msg, ecoLang["Admin"]["NO_QUEUE"]);
                 }
 
                 // Check args length
                 if (args.length < 3)
                     return utils.sendMessage(msg, ecoLang["Help"]["SET"]);
+
                 // Check if author already in queue
                 if (!setQueue.has(msg.author.id)) {
                     // Check member and amount
@@ -132,6 +150,8 @@ module.exports = {
                 // Return if already have queue
                 utils.sendMessage(msg, manager.placeHolder(lang["Economies"]["Admin"]["ALREADY_IN_SET_QUEUE"],
                     setQueue.get(msg.author.id)["member"], setQueue.get(msg.author.id)["amount"]));
+            } else {
+                utils.sendMessage(msg, lang["Generals"]["UNKNOWN_COMMAND"])
             }
             return;
         }
@@ -159,15 +179,6 @@ module.exports = {
             }
             return true;
         }
-
-        const moneyInfo = new Discord.MessageEmbed()
-            .setColor(botConfig["Colors"]["Yellow"])
-            .setAuthor(`TÀI KHOẢN CỦA ${msg.author.tag}:`.toUpperCase(), msg.author.avatarURL())
-            .addField(`» Trong người: `, `${eco.get(msg.author)} ${botConfig["Economies"]["Suffix"]}`, false)
-            .addField(`» Trong ngân hàng:`, `(bank here) ${botConfig["Economies"]["Suffix"]}`, false)
-            .setThumbnail('https://imgur.com/rL1vPdt.png')
-            .setTimestamp()
-            .setFooter(`JustMangoStudio`, bot.user.avatarURL());
 
         await msg.channel.send(moneyInfo);
     },

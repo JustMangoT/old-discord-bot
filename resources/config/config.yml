@@ -16,6 +16,11 @@ Bot-Settings:
       - "on m!help"
       - "Mango is developing me"
 
+######################
+# +----------------+ #
+# | COLOR SETTINGS | #
+# +----------------+ #
+######################
 Colors: #HEX CODE
   White: "#ffffff"
   Black: "#000000"
@@ -36,6 +41,23 @@ Colors: #HEX CODE
   Pink: "#ff00fb"
   Dark_Pink: "#ff00ae"
 
+########################
+# +------------------+ #
+# | CHANNEL SETTINGS | #
+# +------------------+ #
+########################
+Channels:
+  System: "683709208587534341"
+  Bot:
+    - "683672733493887053"
+    - "683847057617715208"
+    - "672423513495437350"
+
+#####################
+# +---------------+ #
+# | ROLE SETTINGS | #
+# +---------------+ #
+#####################
 Roles:
   Founders: "671562336175259668"
   Administrators: "670094357663055872"
@@ -52,9 +74,6 @@ Roles:
 Economies:
   Name: "MangoCoin"
   Suffix: "MGC"
-  Log:
-    Enable: true
-    Prefix: "MangoCoin System"
 
 #######################
 # +-----------------+ #
@@ -68,153 +87,179 @@ Digger:
     Money_Per_Time: 86400
     Description: "Cỗ máy đào tiền ảo thời xa xưa! Siêu chậm!"
     Max_Storage: 5
+    Durability: 20
   Digger_2:
     Name: "Máy đào thể hệ cũ (Cấp độ 2)"
     Money_Per_Time: 82800
     Description: "Cỗ máy đào tiền ảo thời xa xưa! Cực kì chậm!"
     Max_Storage: 10
+    Durability: 30
     Price: 2
   Digger_3:
     Name: "Máy đào thể hệ cũ (Cấp độ 3)"
     Money_Per_Time: 79200
     Description: "Cỗ máy đào tiền ảo thời xa xưa! Quá chậm!"
     Max_Storage: 15
+    Durability: 40
     Price: 4
   Digger_4:
     Name: "Máy đào thể hệ mới (Cấp độ 1)"
     Money_Per_Time: 75600
     Description: "Cỗ máy đào tiền ảo thời xa xưa! Rất chậm!"
     Max_Storage: 20
+    Durability: 50
     Price: 7
   Digger_5:
     Name: "Máy đào thể hệ mới (Cấp độ 2)"
     Money_Per_Time: 72000
     Description: "Cỗ máy đào tiền ảo hiện đại! Khá chậm!"
     Max_Storage: 25
+    Durability: 60
     Price: 11
   Digger_6:
     Name: "Máy đào thể hệ mới (Cấp độ 3)"
     Money_Per_Time: 68400
     Description: "Cỗ máy đào tiền ảo hiện đại! Chậm!"
     Max_Storage: 30
+    Durability: 70
     Price: 16
   Digger_7:
     Name: "Máy đào loại Bạc (Cấp độ 1)"
     Money_Per_Time: 64800
     Description: "Cỗ máy đào tiền ảo hiện đại! Hơi chậm!"
     Max_Storage: 35
+    Durability: 80
     Price: 22
   Digger_8:
     Name: "Máy đào loại Bạc (Cấp độ 2)"
     Money_Per_Time: 61200
     Description: "Cỗ máy đào tiền ảo hiện đại! Bình thường!"
     Max_Storage: 40
+    Durability: 90
     Price: 29
   Digger_9:
     Name: "Máy đào loại Bạc (Cấp độ 3)"
     Money_Per_Time: 57600
     Description: "Cỗ máy đào tiền ảo hiện đại! Phù hợp với mọi người!"
     Max_Storage: 45
+    Durability: 100
     Price: 37
   Digger_10:
     Name: "Máy đào loại Vàng (Cấp độ 1)"
     Money_Per_Time: 54000
     Description: "Cỗ máy đào tiền ảo hiện đại! Phù hợp với những người có thu nhập tốt!"
     Max_Storage: 50
+    Durability: 110
     Price: 48
   Digger_11:
     Name: "Máy đào loại Vàng (Cấp độ 2)"
     Money_Per_Time: 50400
     Description: "Cỗ máy đào tiền ảo hiện đại! Hơi nhanh!"
     Max_Storage: 55
+    Durability: 120
     Price: 58
   Digger_12:
     Name: "Máy đào loại Vàng (Cấp độ 3)"
     Money_Per_Time: 46800
     Description: "Cỗ máy đào tiền ảo hiện đại! Nhanh!"
     Max_Storage: 60
+    Durability: 130
     Price: 69
   Digger_13:
     Name: "Máy đào loại Bạch Kim (Cấp độ 1)"
     Money_Per_Time: 43200
     Description: "Cỗ máy đào tiền ảo hiện đại! Khá nhanh!"
     Max_Storage: 65
+    Durability: 140
     Price: 81
   Digger_14:
     Name: "Máy đào loại Bạch Kim (Cấp độ 2)"
     Money_Per_Time: 39600
     Description: "Cỗ máy đào tiền ảo hiện đại! Rất nhanh!"
     Max_Storage: 70
+    Durability: 150
     Price: 94
   Digger_15:
     Name: "Máy đào loại Bạch Kim (Cấp độ 3)"
     Money_Per_Time: 36000
     Description: "Cỗ máy đào tiền ảo hiện đại! Quá nhanh!"
     Max_Storage: 75
+    Durability: 160
     Price: 108
   Digger_16:
     Name: "Máy đào loại Kim Cương (Cấp độ 1)"
     Money_Per_Time: 32400
     Description: "Cỗ máy đào tiền ảo hiện đại! Cực kì nhanh!"
     Max_Storage: 80
+    Durability: 170
     Price: 123
   Digger_17:
     Name: "Máy đào loại Kim Cương (Cấp độ 2)"
     Money_Per_Time: 28800
     Description: "Cỗ máy đào tiền ảo hiện đại! Siêu nhanh!"
     Max_Storage: 85
+    Durability: 180
     Price: 139
   Digger_18:
     Name: "Máy đào loại Kim Cương (Cấp độ 3)"
     Money_Per_Time: 25200
     Description: "Cỗ máy đào tiền ảo hiện đại! Tốc độ máy bay!"
     Max_Storage: 90
+    Durability: 190
     Price: 156
   Digger_19:
     Name: "Máy đào Siêu Cấp (Cấp độ 1)"
     Money_Per_Time: 21600
     Description: "Cỗ máy đào tiền ảo vũ trụ! Tốc độ tàu vũ trụ!"
     Max_Storage: 95
+    Durability: 200
     Price: 174
   Digger_20:
     Name: "Máy đào Siêu Cấp (Cấp độ 2)"
     Money_Per_Time: 18000
     Description: "Cỗ máy đào tiền ảo vũ trụ! Tộc độ âm thanh!"
     Max_Storage: 100
+    Durability: 210
     Price: 193
   Digger_21:
     Name: "Máy đào Siêu Cấp (Cấp độ 3)"
     Money_Per_Time: 14400
     Description: "Cỗ máy đào tiền ảo vũ trụ! Tốc độ ánh sáng!"
     Max_Storage: 110
+    Durability: 250
     Price: 213
   Digger_22:
     Name: "Máy đào Vô Cực (Cấp độ 1)"
     Money_Per_Time: 10800
     Description: "Cỗ máy đào tiền ảo vũ trụ! Siêu tốc độ!"
     Max_Storage: 120
+    Durability: 275
     Price: 240
   Digger_23:
     Name: "Máy đào Vô Cực (Cấp độ 2)"
     Money_Per_Time: 7200
     Description: "Cỗ máy đào tiền ảo vũ trụ! Siêu tốc độ+!"
     Max_Storage: 140
+    Durability: 300
     Price: 260
   Digger_24:
     Name: "Máy đào Vô Cực (Cấp độ 3)"
     Money_Per_Time: 3600
     Description: "Cỗ máy đào tiền ảo vũ trụ! Siêu tốc dộ++!"
     Max_Storage: 180
+    Durability: 350
     Price: 280
   Digger_25:
     Name: "Máy đào Siêu Vô Cực (Cấp độ 1)"
     Money_Per_Time: 2700
     Description: "Cỗ máy đào tiền ảo vũ trụ! Không còn gì để nói!"
     Max_Storage: 220
+    Durability: 400
     Price: 300
   Digger_26:
     Name: "Máy đào Siêu Vô Cực (Cấp độ 2)"
     Money_Per_Time: 1800
     Description: "Cỗ máy đào tiền ảo vũ trụ! Nhanh nhất trong tất cả!"
     Max_Storage: 250
+    Durability: 500
     Price: 330

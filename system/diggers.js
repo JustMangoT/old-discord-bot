@@ -16,12 +16,21 @@ module.exports = {
     },
     async getMaxStorage(user) {
         const botConfig = await config.getDefaultConfig();
-        return botConfig["Diggers"]["Digger_" + this.getLevel(user)]["Max_Storage"];
+        return botConfig["Digger"]["Digger_" + this.getLevel(user)]["Max_Storage"];
     },
     getStatus(user) {
-        const status = db.get(`${user.id}.diggerStatus`);
-        if (status) return "Đang chạy";
+        return db.get(`${user.id}.diggerStatus`);
+    },
+    getStatusAsMessage(user) {
+        if (db.get(`${user.id}.diggerStatus`)) return "Đang chạy";
         else return "Đang dừng";
+    },
+    getDurability(user) {
+        return db.get(`${user.id}.diggerDurability`)
+    },
+    async getMaxDurability(user) {
+        const botConfig = await config.getDefaultConfig();
+        return botConfig["Digger"]["Digger_" + this.getLevel(user)]["Durability"];
     },
     async getPercentFull(user) {
         return utils.formatNum((this.getStorage(user) * 100) / await this.getMaxStorage(user));
@@ -71,29 +80,58 @@ module.exports = {
         }
         return false;
     },
+    addDurability(user, amount) {
+        if (manager.check(user, amount)) {
+            db.add(`${user.id}.diggerDurability`, amount);
+            return true;
+        }
+        return false;
+    },
+    removeDurability(user, amount) {
+        if (manager.check(user, amount)) {
+            db.add(`${user.id}.diggerDurability`, amount * -1);
+            return true;
+        }
+        return false;
+    },
+    setDurability(user, amount) {
+        if (manager.check(user, amount)) {
+            db.set(`${user.id}.diggerDurability`, amount);
+            return true;
+        }
+        return false;
+    },
     async start(msg, user, delay) {
         const lang = await config.getLanguageConfig();
         if (!this.getStatus(user)) {
             this.setStatus(user, true);
             digging = setInterval(async () => {
+                if (this.getDurability(user) === 0) {
+                    await utils.sendMessage(msg, lang["Diggers"]["BREAK"]);
+                    this.stop(user);
+                    return false;
+                }
                 if (this.getStorage(user) >= await this.getMaxStorage(user)) {
-                    this.setStatus(user, false);
-                    await msg.reply(lang["Digger"]["FULL_STORAGE"]);
-                    clearInterval(digging);
+                    await utils.sendMessage(msg, lang["Diggers"]["FULL_STORAGE"]);
+                    this.stop(user);
                     return false;
                 }
                 this.addStorage(user, 1);
+                this.removeDurability(user, 1);
             }, delay * 1000);
             return true;
         }
+        await msg.reply(lang["Diggers"]["ALREADY_START"]);
         return false;
     },
-    stop(user) {
+    async stop(msg, user) {
+        const lang = await config.getLanguageConfig();
         if (this.getStatus(user)) {
             this.setStatus(user, false);
             clearInterval(digging);
             return true;
         }
+        await msg.reply(lang["Diggers"]["ALREADY_STOP"]);
         return false;
     },
     collect(user) {
@@ -107,7 +145,6 @@ module.exports = {
     async upgrade(user) {
         const botConfig = await config.getDefaultConfig();
         if (this.getLevel(user) < botConfig["Digger"]["Max_Level"]) {
-            let nextLevel = this.getLevel(user) + 1;
             this.stop(user);
             this.addLevel(user, 1);
             return true;
